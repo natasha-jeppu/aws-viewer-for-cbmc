@@ -17,6 +17,7 @@ TRACE_TEMPLATE = 'trace.jinja.html'
 # runtime analysis metrics
 ALIAS_SUMMARY_TEMPLATE = 'alias.jinja.html'
 ARRAY_CONSTRAINT_SUMMARY_TEMPLATE = 'array.jinja.html'
+BYTEOP_SUMMARY_TEMPLATE = 'byteop.jinja.html'
 
 ENV = None
 
@@ -67,4 +68,11 @@ def render_array_constraint_summary(array_constraint_summary):
 
     return env().get_template(ARRAY_CONSTRAINT_SUMMARY_TEMPLATE).render(
         summary=array_constraint_summary
+    )
+
+def render_byteop_summary(byteop_summary):
+    """Render byte op metrics as html."""
+
+    return env().get_template(BYTEOP_SUMMARY_TEMPLATE).render(
+        byteops=byteop_summary
     )

@@ -114,7 +114,6 @@ def property(parser):
     )
     return parser
 
-
 def alias(parser):
     'Define --alias command line option.'
 
@@ -139,6 +138,20 @@ def array(parser):
         CBMC array constraints added during postprocessing.
         A json file containing the output of
         'cbmc --show-array-constraints'.
+        """
+    )
+    return parser
+
+def byteop(parser):
+    'Define --byteop command line option.'
+
+    parser.add_argument(
+        '--byteop',
+        metavar='FILE',
+        help="""
+        CBMC byte extract and update metrics.
+        A json file containing the output of
+        'cbmc --show-byte-ops --json-ui'.
         """
     )
     return parser

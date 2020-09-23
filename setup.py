@@ -50,7 +50,8 @@ setuptools.setup(
             "make-symbol = cbmc_viewer.make_symbol:main",
             "make-trace = cbmc_viewer.make_trace:main",
             "make-alias = cbmc_viewer.make_alias:main",
-            "make-array = cbmc_viewer.make_array:main"
+            "make-array = cbmc_viewer.make_array:main",
+            "make-byteop = cbmc_viewer.make_byteop:main"
         ]
     }
 )

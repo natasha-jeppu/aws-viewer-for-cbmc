@@ -29,6 +29,7 @@ from cbmc_viewer import tracet
 # runtime analysis metrics
 from cbmc_viewer import aliast
 from cbmc_viewer import arrayt
+from cbmc_viewer import byteopt
 
 def create_parser():
     """Create the command line parser."""
@@ -48,6 +49,7 @@ def create_parser():
     # runtime analysis metrics
     optionst.alias(cbmc_data)
     optionst.array(cbmc_data)
+    optionst.byteop(cbmc_data)
 
     proof_sources = parser.add_argument_group('Sources')
     optionst.srcdir(proof_sources)
@@ -218,7 +220,6 @@ def viewer():
     dump(symbols, 'viewer-symbol.json')
     progress("Preparing symbol table", True)
 
-
     if args.alias:
         progress("Scanning points-to set data")
         alias = aliast.do_make_alias(args.alias)
@@ -235,9 +236,17 @@ def viewer():
     else:
         array = None
 
+    if args.byteop:
+        progress("Scanning byteop data")
+        byteop = byteopt.do_make_byteop(args.byteop,
+                                     args.srcdir)
+        dump(byteop, 'viewer-byteop.json')
+        progress("Scanning byteop data", True)
+    else:
+        byteop = None
+
     config = configt.Config(args.config)
     report.report(config, sources, symbols, results, coverage, traces,
-                  properties, loops, alias, array, htmldir, progress)
-
+                  properties, loops, alias, array, byteop, htmldir, progress)
 
     global_progress("CBMC viewer", True)
