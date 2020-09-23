@@ -19,6 +19,7 @@ ALIAS_SUMMARY_TEMPLATE = 'alias.jinja.html'
 ARRAY_CONSTRAINT_SUMMARY_TEMPLATE = 'array.jinja.html'
 BYTEOP_SUMMARY_TEMPLATE = 'byteop.jinja.html'
 CLAUSE_SUMMARY_TEMPLATE = 'clause.jinja.html'
+MEMOP_SUMMARY_TEMPLATE = 'memop.jinja.html'
 
 ENV = None
 
@@ -83,4 +84,10 @@ def render_clause_summary(clause_summary, core_instr, loc_not_in_core):
 
     return env().get_template(CLAUSE_SUMMARY_TEMPLATE).render(
         summary=clause_summary, core=core_instr, notcore=loc_not_in_core
+    )
+
+def render_memop_summary(memop_summary):
+
+    return env().get_template(MEMOP_SUMMARY_TEMPLATE).render(
+        summary=memop_summary
     )

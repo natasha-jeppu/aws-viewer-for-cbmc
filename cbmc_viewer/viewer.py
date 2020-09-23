@@ -31,6 +31,7 @@ from cbmc_viewer import aliast
 from cbmc_viewer import arrayt
 from cbmc_viewer import byteopt
 from cbmc_viewer import clauset
+from cbmc_viewer import memopt
 
 def create_parser():
     """Create the command line parser."""
@@ -52,6 +53,7 @@ def create_parser():
     optionst.array(cbmc_data)
     optionst.byteop(cbmc_data)
     optionst.clause(cbmc_data)
+    optionst.memop(cbmc_data)
 
     proof_sources = parser.add_argument_group('Sources')
     optionst.srcdir(proof_sources)
@@ -256,8 +258,17 @@ def viewer():
     else:
         clause = None
 
+    if args.memop:
+        progress("Scanning memory operation call data")
+        memop = memopt.do_make_memop(args.memop,
+                                    args.srcdir)
+        dump(memop, 'viewer-memop.json')
+        progress("Scanning memory operation call data", True)
+    else:
+        memop = None
+
     config = configt.Config(args.config)
     report.report(config, sources, symbols, results, coverage, traces,
-                  properties, loops, alias, array, byteop, clause, htmldir, progress)
+                  properties, loops, alias, array, byteop, clause, memop, htmldir, progress)
 
     global_progress("CBMC viewer", True)
