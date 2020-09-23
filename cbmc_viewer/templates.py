@@ -20,6 +20,7 @@ ARRAY_CONSTRAINT_SUMMARY_TEMPLATE = 'array.jinja.html'
 BYTEOP_SUMMARY_TEMPLATE = 'byteop.jinja.html'
 CLAUSE_SUMMARY_TEMPLATE = 'clause.jinja.html'
 MEMOP_SUMMARY_TEMPLATE = 'memop.jinja.html'
+RUNTIME_ANALYSIS_SUMMARY_TEMPLATE = 'runtime_analysis_report.jinja.html'
 
 ENV = None
 
@@ -90,4 +91,11 @@ def render_memop_summary(memop_summary):
 
     return env().get_template(MEMOP_SUMMARY_TEMPLATE).render(
         summary=memop_summary
+    )
+
+def render_runtime_analysis_summary(runtime_analysis_summary):
+    """Render runtime analysis summary as html."""
+
+    return env().get_template(RUNTIME_ANALYSIS_SUMMARY_TEMPLATE).render(
+        summary=runtime_analysis_summary
     )

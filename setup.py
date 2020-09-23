@@ -53,7 +53,8 @@ setuptools.setup(
             "make-array = cbmc_viewer.make_array:main",
             "make-byteop = cbmc_viewer.make_byteop:main",
             "make-clause = cbmc_viewer.make_clause:main",
-            "make-memop = cbmc_viewer.make_memop:main"
+            "make-memop = cbmc_viewer.make_memop:main",
+            "make-metric-report = cbmc_viewer.make_metric_report:main"
         ]
     }
 )
