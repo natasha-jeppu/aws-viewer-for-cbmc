@@ -156,6 +156,20 @@ def byteop(parser):
     )
     return parser
 
+def clause(parser):
+    'Define --clause command line option.'
+
+    parser.add_argument(
+        '--clause',
+        metavar='FILE',
+        help="""
+        CBMC solver query complexity stats.
+        A json file containing the output of
+        'cbmc --write-solver-stats-to clause.json'.
+        """
+    )
+    return parser
+
 def exclude(parser):
     'Define --exclude command line option.'
 

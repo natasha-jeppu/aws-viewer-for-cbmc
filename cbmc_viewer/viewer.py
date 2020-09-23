@@ -30,6 +30,7 @@ from cbmc_viewer import tracet
 from cbmc_viewer import aliast
 from cbmc_viewer import arrayt
 from cbmc_viewer import byteopt
+from cbmc_viewer import clauset
 
 def create_parser():
     """Create the command line parser."""
@@ -50,6 +51,7 @@ def create_parser():
     optionst.alias(cbmc_data)
     optionst.array(cbmc_data)
     optionst.byteop(cbmc_data)
+    optionst.clause(cbmc_data)
 
     proof_sources = parser.add_argument_group('Sources')
     optionst.srcdir(proof_sources)
@@ -245,8 +247,17 @@ def viewer():
     else:
         byteop = None
 
+    if args.clause:
+        progress("Scanning solver query complexity data")
+        clause = clauset.do_make_clause(args.clause,
+                                        args.srcdir)
+        dump(clause, 'viewer-clause.json')
+        progress("Scanning solver query complexity data", True)
+    else:
+        clause = None
+
     config = configt.Config(args.config)
     report.report(config, sources, symbols, results, coverage, traces,
-                  properties, loops, alias, array, byteop, htmldir, progress)
+                  properties, loops, alias, array, byteop, clause, htmldir, progress)
 
     global_progress("CBMC viewer", True)
