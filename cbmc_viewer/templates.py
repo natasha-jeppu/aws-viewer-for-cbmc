@@ -16,6 +16,7 @@ TRACE_TEMPLATE = 'trace.jinja.html'
 
 # runtime analysis metrics
 ALIAS_SUMMARY_TEMPLATE = 'alias.jinja.html'
+ARRAY_CONSTRAINT_SUMMARY_TEMPLATE = 'array.jinja.html'
 
 ENV = None
 
@@ -59,4 +60,11 @@ def render_alias_summary(alias_summary):
     return env().get_template(ALIAS_SUMMARY_TEMPLATE).render(
         summary=alias_summary.summary, max=alias_summary.max, 
         total=alias_summary.total
+    )
+
+def render_array_constraint_summary(array_constraint_summary):
+    """Render array constraint summary as html."""
+
+    return env().get_template(ARRAY_CONSTRAINT_SUMMARY_TEMPLATE).render(
+        summary=array_constraint_summary
     )

@@ -114,6 +114,7 @@ def property(parser):
     )
     return parser
 
+
 def alias(parser):
     'Define --alias command line option.'
 
@@ -124,6 +125,20 @@ def alias(parser):
         CBMC points-to set metrics.
         A json file containing the output of
         'cbmc --show-points-to-sets --json-ui'.
+        """
+    )
+    return parser
+
+def array(parser):
+    'Define --array command line option.'
+
+    parser.add_argument(
+        '--array',
+        metavar='FILE',
+        help="""
+        CBMC array constraints added during postprocessing.
+        A json file containing the output of
+        'cbmc --show-array-constraints'.
         """
     )
     return parser

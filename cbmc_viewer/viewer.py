@@ -28,6 +28,7 @@ from cbmc_viewer import tracet
 
 # runtime analysis metrics
 from cbmc_viewer import aliast
+from cbmc_viewer import arrayt
 
 def create_parser():
     """Create the command line parser."""
@@ -46,6 +47,7 @@ def create_parser():
 
     # runtime analysis metrics
     optionst.alias(cbmc_data)
+    optionst.array(cbmc_data)
 
     proof_sources = parser.add_argument_group('Sources')
     optionst.srcdir(proof_sources)
@@ -216,6 +218,7 @@ def viewer():
     dump(symbols, 'viewer-symbol.json')
     progress("Preparing symbol table", True)
 
+
     if args.alias:
         progress("Scanning points-to set data")
         alias = aliast.do_make_alias(args.alias)
@@ -224,8 +227,17 @@ def viewer():
     else:
         alias = None
 
+    if args.array:
+        progress("Scanning array constraint data")
+        array = arrayt.do_make_array(args.array)
+        dump(array, 'viewer-array.json')
+        progress("Scanning array constraint data", True)
+    else:
+        array = None
+
     config = configt.Config(args.config)
     report.report(config, sources, symbols, results, coverage, traces,
-                  properties, loops, alias, htmldir, progress)
+                  properties, loops, alias, array, htmldir, progress)
+
 
     global_progress("CBMC viewer", True)
